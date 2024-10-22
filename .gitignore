@@ -1,3 +1,6 @@
 libraries/
-
 .vscode/
+
+*.out
+*.so
+*.exe

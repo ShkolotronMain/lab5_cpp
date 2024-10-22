@@ -19,10 +19,10 @@ Course::Course(json val)
 
 Course::~Course()
 {
-    currency.clear();
-    state.clear();
-    code.clear();
-    subunit.clear();
+    currency = "";
+    state = "";
+    code = "";
+    subunit = "";
     fraction = 0;
     rate = 0;
 }

@@ -1,0 +1,147 @@
+#include "interpreter.hpp"
+
+Interpreter::Interpreter()
+{
+    src = Stock();
+}
+
+Interpreter::~Interpreter()
+{
+    
+}
+
+void Interpreter::loop()
+{
+    running = 1;
+
+    while (running)
+    {
+        prompt();
+        int com = get_command();
+        
+        switch (com)
+        {
+        case 1:
+            add();
+            break;
+
+        case 2:
+            pop();
+            break;
+
+        case 3:
+            read_json();
+            break;
+
+        case 4:
+            write_json();
+            break;
+
+        case 5:
+            src.print_all();
+            cout << endl;
+            break;
+        
+        case 6:
+            src.print_exp();
+            cout << endl;
+            break;
+
+        case 7:
+            print_help();
+            break;
+
+        case 8:
+            cout << "Выход" << endl;
+            running = 0;
+            break;
+
+        default:
+            cout << "Неверная комманда" << endl;
+            cout << "Для получения списка комманд введите help" << endl;
+            break;
+        }
+    }
+}
+
+void Interpreter::prompt()
+{
+    char c = ' ';
+    if (last)
+        c = '\u2713';
+    else
+        c = '\u2715';
+    cout << "[" << c << "]> ";
+}
+
+int Interpreter::get_command()
+{
+    int res = 0;
+    string command;
+    cin >> command;
+
+    if (command == "add")
+        res = 1;
+    else if (command == "pop")
+        res = 2;
+    else if (command == "read_from_json")
+        res = 3;
+    else if (command == "write_to_json")
+        res = 4;
+    else if (command == "print_all")
+        res = 5;
+    else if (command == "print_exp")
+        res = 6;
+    else if (command == "help")
+        res = 7;
+    else if (command == "exit")
+        res = 8;
+
+    return res;
+}
+
+void Interpreter::print_help()
+{
+    cout << "Список доступных комманд: " << endl;
+    cout << "add - добавить в контейнер" << endl;
+    cout << "pop - убрать из контейнера" << endl;
+    cout << "read_from_json - ввести несколько из JSON (перезапись)" << endl;
+    cout << "write_to_json - сохранить всё в JSON" << endl;
+    cout << "print_all - вывести все" << endl;
+    cout << "help - список команд" << endl;
+    cout << "exit - выход" << endl << endl; 
+}
+
+void Interpreter::add()
+{
+    Course nc = Course();
+    nc.read_from_console();
+    src.add(nc);
+    cout << endl;
+}
+
+void Interpreter::pop()
+{
+    int c;
+    cout << "Введите индекс удаляемого элемента: ";
+    cin >> c;
+    src.pop(c);
+}
+
+void Interpreter::read_json()
+{
+    string path;
+    cout << "Введите путь к файлу" << endl;
+    cin >> path;
+    src.read_from_json(path);
+    cout << endl;
+}
+
+void Interpreter::write_json()
+{
+    string path;
+    cout << "Введите путь к файлу" << endl;
+    cin >> path;
+    src.write_to_json(path);
+    cout << endl;
+}
