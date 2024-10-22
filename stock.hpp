@@ -4,28 +4,32 @@
 #include <iostream>
 #include "course.hpp"
 
+// Класс-контейнер
 class Stock
 {
-    // Класс рынок
-    // Класс-контейнер
     private:
+        // Массив с курсами валют
         Course* mas;
+        // Количество элементов на рынке
         int cnt;
 
+        // Разница двух элементов на рынке
         double diff(Course, Course);
 
     public:
         Stock();
         ~Stock();
-
-        void add(Course);
+        
         bool pop(int);
 
-        bool read_from_json(string);
-        bool write_to_json(string);
+        bool read_from_json(string);  // TODO: переписать на оператор
+        bool write_to_json(string);   // TODO: переписать на оператор
 
         void print_all();
         bool print_exp();
+
+        // Добавление элемента на рынок
+        void operator+=(Course);
 };
 
 #endif

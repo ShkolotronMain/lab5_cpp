@@ -16,19 +16,6 @@ Stock::~Stock()
     cnt = 0;
 }
 
-void Stock::add(Course _course)
-{
-    cnt++;
-    Course* new_mas = new Course[cnt];
-    for (int i=0; i<cnt-1; i++)
-        new_mas[i] = mas[i];
-    Course* old_mas = mas;
-    mas = new_mas;
-    delete[] old_mas;
-
-    mas[cnt-1] = _course;
-}
-
 bool Stock::pop(int index)
 {
     if (index>=0 && index < cnt)
@@ -113,7 +100,7 @@ bool Stock::read_from_json(string path)
         {
             json value = file["values"][i];
             Course nc = Course(value);
-            add(nc);
+            *(this)+=nc;
         }
         
         return 1;
@@ -149,4 +136,17 @@ bool Stock::write_to_json(string path)
         cerr << "Ошибка открытия файла" << endl;
         return 0;
     }
+}
+
+void Stock::operator+=(Course _course)
+{
+    cnt++;
+    Course* new_mas = new Course[cnt];
+    for (int i=0; i<cnt-1; i++)
+        new_mas[i] = mas[i];
+    Course* old_mas = mas;
+    mas = new_mas;
+    delete[] old_mas;
+
+    mas[cnt-1] = _course;
 }

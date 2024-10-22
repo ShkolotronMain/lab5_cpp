@@ -7,10 +7,9 @@
 using namespace std;
 using namespace nlohmann;
 
+// Основной класс
 class Course
 {
-    // Класс курс
-    // Основной класс
     private:
         string currency;
         string state;
@@ -22,16 +21,20 @@ class Course
     public:
         Course();
         Course(json);
-        ~Course();
 
+        // Получить объект в формате JSON
         json get_object();
+        // Геттер поля code
         string get_code();
+        // Геттер поля rate
         double get_rate();
 
+        // Консольный вывод
         friend ostream& operator<<(ostream&, const Course&);
-        friend istream& operator>>(istream&, Course&);
-
-        friend bool operator==(Course, Course);
+        // Консольный ввод  
+        friend istream& operator>>(istream&, Course&);        
+        // Сравнение
+        friend bool operator==(Course, Course);               
 };
 
 #endif

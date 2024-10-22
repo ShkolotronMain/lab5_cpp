@@ -3,7 +3,12 @@
 
 Course::Course()
 {
-
+    currency = "";
+    state = "";
+    code = "";
+    subunit = "";
+    fraction = 0;
+    rate = 0;
 }
 
 Course::Course(json val)
@@ -14,11 +19,6 @@ Course::Course(json val)
     subunit = val["subunit"];
     fraction = val["fraction"];
     rate = val["rate"];
-}
-
-Course::~Course()
-{
-
 }
 
 json Course::get_object()

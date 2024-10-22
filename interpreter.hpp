@@ -3,10 +3,9 @@
 
 #include "stock.hpp"
 
+// Класс интерпретатора
 class Interpreter
 {
-    // Класс интерпретатора
-    // Нужен для передачи команд из консоли в класс-контейнер
     private:
         Stock* src;
         bool running = 0;
@@ -26,6 +25,7 @@ class Interpreter
         Interpreter();
         ~Interpreter();
 
+        // Цикл интерпретатора
         void loop();
 };
 

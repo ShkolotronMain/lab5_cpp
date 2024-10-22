@@ -7,6 +7,7 @@ Interpreter::Interpreter()
 
 Interpreter::~Interpreter()
 {
+    delete[] src;
 }
 
 void Interpreter::loop()
@@ -61,8 +62,6 @@ void Interpreter::loop()
             break;
         }
     }
-
-    delete src;
 }
 
 void Interpreter::prompt()
@@ -89,7 +88,7 @@ int Interpreter::get_command()
         res = 3;
     else if (command == "write_json")
         res = 4;
-    else if (command == "print_all")
+    else if (command == "print")
         res = 5;
     else if (command == "print_exp")
         res = 6;
@@ -108,7 +107,7 @@ void Interpreter::print_help()
     cout << "pop - убрать из контейнера" << endl;
     cout << "read_json - ввести несколько из JSON" << endl;
     cout << "write_json - сохранить всё в JSON" << endl;
-    cout << "print_all - вывести все" << endl;
+    cout << "print - вывести все" << endl;
     cout << "help - список команд" << endl;
     cout << "exit - выход" << endl << endl; 
 }
@@ -117,7 +116,7 @@ void Interpreter::add()
 {
     Course nc = Course();
     cin >> nc;
-    src->add(nc);
+    *(src)+=nc;
     cout << endl;
 }
 
