@@ -24,14 +24,12 @@ class Course
         Course(json);
         ~Course();
 
-        void read_from_console();
-        void print();
-
         json get_object();
         string get_code();
         double get_rate();
 
         friend ostream& operator<<(ostream&, const Course&);
+        friend istream& operator>>(istream&, Course&);
 
         friend bool operator==(Course, Course);
 };

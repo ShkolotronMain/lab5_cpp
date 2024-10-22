@@ -87,10 +87,7 @@ bool Stock::print_exp()
     {
         for (int i=0; i<cnt; i++)
             if (diff(usd, mas[i]) < 0)
-            {
-                mas[i].print();
-                cout << endl;
-            }
+                cout << mas[i] << endl;
         return 1;
     }
     else

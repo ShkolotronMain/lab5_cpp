@@ -116,7 +116,7 @@ void Interpreter::print_help()
 void Interpreter::add()
 {
     Course nc = Course();
-    nc.read_from_console();
+    cin >> nc;
     src->add(nc);
     cout << endl;
 }

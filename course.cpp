@@ -21,31 +21,6 @@ Course::~Course()
 
 }
 
-void Course::print()
-{
-    
-}
-
-void Course::read_from_console()
-{
-    string trash;
-
-    getline(cin, trash);
-    cout << "Введите название валюты:" << endl;
-    getline(cin, currency);
-    cout << "Введите государство:" << endl;
-    getline(cin, state);
-    cout << "Введите код валюты:" << endl;
-    getline(cin, code);
-    cout << "Введите название разменной валюты:" << endl;
-    getline(cin, subunit);
-    cout << "Сколько разменной валюты в основной:" << endl;
-    cin >> fraction;
-    cout << "Введите курс валюты к российскому рублю:" << endl;
-    cin >> rate;
-    getline(cin, trash);   
-}
-
 json Course::get_object()
 {
     json value;
@@ -88,8 +63,30 @@ ostream& operator<<(ostream& out, const Course& cl)
     out << cl.currency << endl;
     out << cl.state << endl;
     out << cl.code << endl;
-    out << "1 " + cl.code + " = " << cl.rate << endl;
+    out << "1 " + cl.code + " = " << cl.rate << " RUB" << endl;
     out << "===================" << endl;
 
     return out;
+}
+
+istream &operator>>(istream& in, Course& c)
+{
+    string trash;
+
+    getline(in, trash);
+    cout << "Введите название валюты:" << endl;
+    getline(in, c.currency);
+    cout << "Введите государство:" << endl;
+    getline(in, c.state);
+    cout << "Введите код валюты:" << endl;
+    getline(in, c.code);
+    cout << "Введите название разменной валюты:" << endl;
+    getline(in, c.subunit);
+    cout << "Сколько разменной валюты в основной:" << endl;
+    in >> c.fraction;
+    cout << "Введите курс валюты к российскому рублю:" << endl;
+    in >> c.rate;
+    getline(in, trash);
+
+    return in;
 }
