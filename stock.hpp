@@ -2,7 +2,6 @@
 #define STOCK_H
 
 #include <iostream>
-#include <fstream>
 #include "course.hpp"
 
 class Stock

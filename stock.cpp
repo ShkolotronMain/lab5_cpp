@@ -1,5 +1,4 @@
 #include "stock.hpp"
-#include "libraries/json.hpp"
 
 using namespace nlohmann;
 

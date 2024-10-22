@@ -1,6 +1,5 @@
 #include <iostream>
 #include "course.hpp"
-#include "libraries/json.hpp"
 
 Course::Course()
 {
