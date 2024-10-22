@@ -17,13 +17,13 @@ class Stock
         ~Stock();
 
         void add(Course);
-        void pop(int);
+        bool pop(int);
 
-        void read_from_json(string);
-        void write_to_json(string);
+        bool read_from_json(string);
+        bool write_to_json(string);
 
         void print_all();
-        void print_exp();
+        bool print_exp();
 };
 
 #endif

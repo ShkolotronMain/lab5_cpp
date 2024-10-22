@@ -2,9 +2,11 @@
 
 int main()
 {
-    Interpreter inter = Interpreter();
+    Interpreter* inter = new Interpreter();
 
-    inter.loop();
+    inter->loop();
+
+    delete inter;
 
     return 0;
 }

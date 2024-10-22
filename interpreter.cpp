@@ -2,12 +2,12 @@
 
 Interpreter::Interpreter()
 {
-    src = Stock();
+    src = *(new Stock());
 }
 
 Interpreter::~Interpreter()
 {
-    
+    delete &src;
 }
 
 void Interpreter::loop()
@@ -43,7 +43,7 @@ void Interpreter::loop()
             break;
         
         case 6:
-            src.print_exp();
+            last = src.print_exp();
             cout << endl;
             break;
 
@@ -58,7 +58,7 @@ void Interpreter::loop()
 
         default:
             cout << "Неверная комманда" << endl;
-            cout << "Для получения списка комманд введите help" << endl;
+            cout << "Для получения списка комманд введите help" << endl << endl;
             break;
         }
     }
@@ -66,11 +66,11 @@ void Interpreter::loop()
 
 void Interpreter::prompt()
 {
-    char c = ' ';
+    string c;
     if (last)
-        c = '\u2713';
+        c = "✅";
     else
-        c = '\u2715';
+        c = "❌";
     cout << "[" << c << "]> ";
 }
 
@@ -84,9 +84,9 @@ int Interpreter::get_command()
         res = 1;
     else if (command == "pop")
         res = 2;
-    else if (command == "read_from_json")
+    else if (command == "read_json")
         res = 3;
-    else if (command == "write_to_json")
+    else if (command == "write_json")
         res = 4;
     else if (command == "print_all")
         res = 5;
@@ -105,8 +105,8 @@ void Interpreter::print_help()
     cout << "Список доступных комманд: " << endl;
     cout << "add - добавить в контейнер" << endl;
     cout << "pop - убрать из контейнера" << endl;
-    cout << "read_from_json - ввести несколько из JSON (перезапись)" << endl;
-    cout << "write_to_json - сохранить всё в JSON" << endl;
+    cout << "read_json - ввести несколько из JSON" << endl;
+    cout << "write_json - сохранить всё в JSON" << endl;
     cout << "print_all - вывести все" << endl;
     cout << "help - список команд" << endl;
     cout << "exit - выход" << endl << endl; 
@@ -125,7 +125,7 @@ void Interpreter::pop()
     int c;
     cout << "Введите индекс удаляемого элемента: ";
     cin >> c;
-    src.pop(c);
+    last = src.pop(c);
 }
 
 void Interpreter::read_json()
@@ -133,7 +133,7 @@ void Interpreter::read_json()
     string path;
     cout << "Введите путь к файлу" << endl;
     cin >> path;
-    src.read_from_json(path);
+    last = src.read_from_json(path);
     cout << endl;
 }
 
@@ -142,6 +142,6 @@ void Interpreter::write_json()
     string path;
     cout << "Введите путь к файлу" << endl;
     cin >> path;
-    src.write_to_json(path);
+    last = src.write_to_json(path);
     cout << endl;
 }

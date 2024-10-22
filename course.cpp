@@ -18,12 +18,7 @@ Course::Course(json val)
 
 Course::~Course()
 {
-    currency = "";
-    state = "";
-    code = "";
-    subunit = "";
-    fraction = 0;
-    rate = 0;
+    
 }
 
 void Course::print()

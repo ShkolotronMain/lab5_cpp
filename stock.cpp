@@ -29,7 +29,7 @@ void Stock::add(Course _course)
     mas[cnt-1] = _course;
 }
 
-void Stock::pop(int index)
+bool Stock::pop(int index)
 {
     if (index>=0 && index < cnt)
     {
@@ -49,10 +49,12 @@ void Stock::pop(int index)
         delete[] old_mas;
 
         cout << "Элемент удалён" << endl;
+        return 1;
     }
     else
     {
         cerr << "Элемент с заданным индексом не существует" << endl;
+        return 0;
     }
 }
 
@@ -67,12 +69,12 @@ double Stock::diff(Course left, Course right)
     return (left.get_rate() - right.get_rate());
 }
 
-void Stock::print_exp()
+bool Stock::print_exp()
 {
     Course usd = {};
     bool usd_exists = 0;
 
-    std::cout << "Стоят дороже доллара:" << endl;
+    cout << "Стоят дороже доллара:" << endl;
 
     for (int i=0; i<cnt && usd_exists==0; i++)
         if (mas[i].get_code().compare("USD") == 0)
@@ -89,12 +91,17 @@ void Stock::print_exp()
                 mas[i].print();
                 cout << endl;
             }
+        return 1;
     }
     else
-        std::cerr << "\nДоллара в выборке нет, сравнение невозможно" << endl;
+    {
+        cerr << "\nДоллара в выборке нет, сравнение невозможно" << endl;
+        return 0;
+    }
+        
 }
 
-void Stock::read_from_json(string path)
+bool Stock::read_from_json(string path)
 {
     json file;
 
@@ -114,14 +121,17 @@ void Stock::read_from_json(string path)
             Course nc = Course(value);
             add(nc);
         }
+        
+        return 1;
     }
     else
     {
         cerr << "Ошибка открытия файла" << endl;
+        return 0;
     }
 }
 
-void Stock::write_to_json(string path)
+bool Stock::write_to_json(string path)
 {
     json file;
 
@@ -138,9 +148,11 @@ void Stock::write_to_json(string path)
     {
         out << file.dump(4);
         cout << "Файл записан" << endl;
+        return 1;
     }
     else
     {
         cerr << "Ошибка открытия файла" << endl;
+        return 0;
     }
 }
