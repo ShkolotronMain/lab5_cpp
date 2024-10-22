@@ -6,6 +6,8 @@
 
 class Stock
 {
+    // Класс рынок
+    // Класс-контейнер
     private:
         Course* mas;
         int cnt;

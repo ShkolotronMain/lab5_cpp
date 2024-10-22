@@ -18,19 +18,12 @@ Course::Course(json val)
 
 Course::~Course()
 {
-    
+
 }
 
 void Course::print()
 {
-    cout << "===================" << endl;
-    cout.setf(ios::fixed);
-    cout.precision(2);
-    cout << currency << endl;
-    cout << state << endl;
-    cout << code << endl;
-    cout << "1 " + code + " = " << rate << endl;
-    cout << "===================" << endl;
+    
 }
 
 void Course::read_from_console()
@@ -73,4 +66,30 @@ string Course::get_code()
 double Course::get_rate()
 {
     return rate;
+}
+
+bool operator==(Course c1, Course c2)
+{
+    bool res = 0;
+
+    if (c1.get_object() == c2.get_object())
+        res = 1;
+    else
+        res = 0; 
+
+    return res;
+}
+
+ostream& operator<<(ostream& out, const Course& cl)
+{
+    out << "===================" << endl;
+    out.setf(ios::fixed);
+    out.precision(2);
+    out << cl.currency << endl;
+    out << cl.state << endl;
+    out << cl.code << endl;
+    out << "1 " + cl.code + " = " << cl.rate << endl;
+    out << "===================" << endl;
+
+    return out;
 }

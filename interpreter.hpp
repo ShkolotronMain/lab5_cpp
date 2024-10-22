@@ -5,8 +5,10 @@
 
 class Interpreter
 {
+    // Класс интерпретатора
+    // Нужен для передачи команд из консоли в класс-контейнер
     private:
-        Stock src;
+        Stock* src;
         bool running = 0;
         bool last = 1;
 

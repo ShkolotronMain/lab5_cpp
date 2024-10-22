@@ -9,6 +9,8 @@ using namespace nlohmann;
 
 class Course
 {
+    // Класс курс
+    // Основной класс
     private:
         string currency;
         string state;
@@ -23,12 +25,15 @@ class Course
         ~Course();
 
         void read_from_console();
-
         void print();
 
         json get_object();
         string get_code();
         double get_rate();
+
+        friend ostream& operator<<(ostream&, const Course&);
+
+        friend bool operator==(Course, Course);
 };
 
 #endif

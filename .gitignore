@@ -4,3 +4,4 @@ libraries/
 *.out
 *.so
 *.exe
+*.o

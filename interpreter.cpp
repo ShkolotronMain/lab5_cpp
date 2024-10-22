@@ -2,12 +2,11 @@
 
 Interpreter::Interpreter()
 {
-    src = *(new Stock());
+    src = new Stock();
 }
 
 Interpreter::~Interpreter()
 {
-    delete &src;
 }
 
 void Interpreter::loop()
@@ -38,12 +37,12 @@ void Interpreter::loop()
             break;
 
         case 5:
-            src.print_all();
+            src->print_all();
             cout << endl;
             break;
         
         case 6:
-            last = src.print_exp();
+            last = src->print_exp();
             cout << endl;
             break;
 
@@ -62,6 +61,8 @@ void Interpreter::loop()
             break;
         }
     }
+
+    delete src;
 }
 
 void Interpreter::prompt()
@@ -116,7 +117,7 @@ void Interpreter::add()
 {
     Course nc = Course();
     nc.read_from_console();
-    src.add(nc);
+    src->add(nc);
     cout << endl;
 }
 
@@ -125,7 +126,7 @@ void Interpreter::pop()
     int c;
     cout << "Введите индекс удаляемого элемента: ";
     cin >> c;
-    last = src.pop(c);
+    last = src->pop(c);
 }
 
 void Interpreter::read_json()
@@ -133,7 +134,7 @@ void Interpreter::read_json()
     string path;
     cout << "Введите путь к файлу" << endl;
     cin >> path;
-    last = src.read_from_json(path);
+    last = src->read_from_json(path);
     cout << endl;
 }
 
@@ -142,6 +143,6 @@ void Interpreter::write_json()
     string path;
     cout << "Введите путь к файлу" << endl;
     cin >> path;
-    last = src.write_to_json(path);
+    last = src->write_to_json(path);
     cout << endl;
 }

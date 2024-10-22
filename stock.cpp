@@ -61,7 +61,7 @@ bool Stock::pop(int index)
 void Stock::print_all()
 {
     for (int i=0; i<cnt; i++)
-        mas[i].print();
+        cout << mas[i];
 }
 
 double Stock::diff(Course left, Course right)
@@ -112,10 +112,7 @@ bool Stock::read_from_json(string path)
         cout << "Файл прочитан" << endl;
         in.close();
 
-        int old_cnt = cnt;
-        cnt = file["count"];
-
-        for (int i=0; i<cnt; i++)
+        for (int i=0; i<file["count"]; i++)
         {
             json value = file["values"][i];
             Course nc = Course(value);
