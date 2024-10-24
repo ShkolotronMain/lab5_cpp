@@ -1,7 +1,6 @@
 #ifndef STOCK_H
 #define STOCK_H
 
-#include <iostream>
 #include "course.hpp"
 
 // Класс-контейнер
@@ -22,14 +21,19 @@ class Stock
         
         bool pop(int);
 
-        bool read_from_json(string);  // TODO: переписать на оператор
-        bool write_to_json(string);   // TODO: переписать на оператор
+        bool read_from_json(string);
+        bool write_to_json(string);
 
         void print_all();
         bool print_exp();
 
         // Добавление элемента на рынок
         void operator+=(Course);
+
+        // Запись в JSON
+        friend ofstream& operator<<(ofstream&, const Stock&);
+        // Чтение из JSON
+        friend ifstream& operator>>(ifstream&, Stock&);
 };
 
 #endif

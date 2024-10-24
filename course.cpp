@@ -1,4 +1,3 @@
-#include <iostream>
 #include "course.hpp"
 
 Course::Course()
@@ -43,7 +42,7 @@ double Course::get_rate()
     return rate;
 }
 
-bool operator==(Course c1, Course c2)
+bool operator==(Course& c1, Course& c2)
 {
     bool res = 0;
 

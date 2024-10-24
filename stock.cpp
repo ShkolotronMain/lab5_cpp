@@ -87,21 +87,12 @@ bool Stock::print_exp()
 
 bool Stock::read_from_json(string path)
 {
-    json file;
-
     ifstream in(path);
     if (in.is_open())
     {
-        in >> file;
+        in >> *this;
         cout << "Файл прочитан" << endl;
         in.close();
-
-        for (int i=0; i<file["count"]; i++)
-        {
-            json value = file["values"][i];
-            Course nc = Course(value);
-            *(this)+=nc;
-        }
         
         return 1;
     }
@@ -114,20 +105,10 @@ bool Stock::read_from_json(string path)
 
 bool Stock::write_to_json(string path)
 {
-    json file;
-
-    file["count"] = cnt;
-
-    for (int i=0; i<cnt; i++)
-    {
-        json value = mas[i].get_object();
-        file["values"].push_back(value);
-    }
-
     ofstream out(path);
     if (out.is_open())
     {
-        out << file.dump(4);
+        out << *this;
         cout << "Файл записан" << endl;
         return 1;
     }
@@ -149,4 +130,35 @@ void Stock::operator+=(Course _course)
     delete[] old_mas;
 
     mas[cnt-1] = _course;
+}
+
+ofstream& operator<<(ofstream& out, const Stock& src)
+{
+    json file;
+
+    file["count"] = src.cnt;
+
+    for (int i=0; i<src.cnt; i++)
+    {
+        json value = src.mas[i].get_object();
+        file["values"].push_back(value);
+    }
+
+    out << file.dump(4);
+    return out;
+}
+
+ifstream& operator>>(ifstream& in, Stock& src)
+{
+    json file;
+
+    in >> file;
+
+    for (int i=0; i<file["count"]; i++)
+    {
+        json value = file["values"][i];
+        Course nc = Course(value);
+        src+=nc;
+    }
+    return in;
 }
