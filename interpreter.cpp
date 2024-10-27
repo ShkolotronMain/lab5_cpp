@@ -108,6 +108,7 @@ void Interpreter::print_help()
     cout << "read_json - ввести несколько из JSON" << endl;
     cout << "write_json - сохранить всё в JSON" << endl;
     cout << "print - вывести все" << endl;
+    cout << "print_exp - вывести те, которые дороже USD" << endl;
     cout << "help - список команд" << endl;
     cout << "exit - выход" << endl << endl; 
 }
