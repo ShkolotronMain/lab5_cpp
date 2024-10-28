@@ -35,7 +35,7 @@ public:
     // Консольный ввод
     friend istream &operator>>(istream&, Course&);
     // Сравнение
-    friend bool operator==(Course&, Course&);
+    bool operator==(Course&);
 };
 
 #endif

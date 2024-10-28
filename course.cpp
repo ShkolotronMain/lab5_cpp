@@ -42,14 +42,14 @@ double Course::get_rate()
     return rate;
 }
 
-bool operator==(Course& c1, Course& c2)
+bool Course::operator==(Course& c2)
 {
     bool res = 0;
 
-    if (c1.get_object() == c2.get_object())
+    if (this->get_object() == c2.get_object())
         res = 1;
     else
-        res = 0; 
+        res = 0;
 
     return res;
 }
